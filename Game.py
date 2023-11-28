@@ -1,4 +1,6 @@
 import sys
+
+from PyQt5 import uic
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow
 
 
@@ -8,31 +10,13 @@ class Lobby(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle('Lobby')
-        self.setGeometry(750, 250, 400, 550)
-
-        self.btnPlay = QPushButton("Play", self)
-        self.btnPlay.resize(100, 100)
-        self.btnPlay.move(150, 180)
-
-        self.btnLiders = QPushButton("Лидеры", self)
-        self.btnLiders.resize(60, 60)
-        self.btnLiders.move(75, 240)
-
-        self.btnSkins = QPushButton("скины", self)
-        self.btnSkins.resize(60, 60)
-        self.btnSkins.move(265, 240)
+        uic.loadUi('untitled.ui', self)
 
         self.btnPlay.clicked.connect(self.openGame)
-        self.btnPlay.clicked.connect(self.closeLobby)
 
     def openGame(self):
         self.Game = Game()
         self.Game.show()
-
-    def closeLobby(self):
-        self.closeLobby = Lobby()
-        self.closeLobby.close()
 
 
 class Game(QWidget):
