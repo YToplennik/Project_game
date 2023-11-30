@@ -63,7 +63,10 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QProgressBar" name="Time">
+  <widget class="QProgressBar" name="timeBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -74,38 +77,27 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>1</pointsize>
+     <pointsize>8</pointsize>
     </font>
    </property>
    <property name="value">
-    <number>24</number>
+    <number>50</number>
    </property>
   </widget>
-  <widget class="QPushButton" name="gameButton00_2">
+  <widget class="QLabel" name="timeText">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>60</y>
-     <width>80</width>
-     <height>80</height>
+     <x>198</x>
+     <y>20</y>
+     <width>51</width>
+     <height>23</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
-     <stylestrategy>NoAntialias</stylestrategy>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>false</bool>
+    <string>Время</string>
    </property>
   </widget>
  </widget>

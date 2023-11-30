@@ -1,7 +1,9 @@
 import sys
 import time
-from PyQt5 import uic, QtCore
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow, QLabel
+from PyQt5 import QtCore, QtGui, uic
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 
 class Lobby(QMainWindow):
@@ -13,6 +15,7 @@ class Lobby(QMainWindow):
         uic.loadUi('untitled.ui', self)
 
         self.btnPlay.clicked.connect(self.openGame)
+        self.Exit.clicked.connect(self.close)
 
     def openGame(self):
         self.Game = Game()
@@ -24,7 +27,8 @@ class Game(QWidget):
         super(Game, self).__init__()
         self.initUI()
         self.gameButton00.hide()
-        self.Time.hide()
+        self.timeBar.setValue(100)
+        self.count = 15
 
     def initUI(self):
         uic.loadUi('Game.ui', self)
@@ -32,6 +36,8 @@ class Game(QWidget):
         self.otschot = QLabel(self)
 
     def StartGame(self):
+        self.timeText.setText(str(self.count))
+        self.timeBar.setValue(self.count / (30 / 100))
         self.StartBtn.hide()
         self.otschot.move(200, 200)
         self.otschot.resize(200, 20)
@@ -39,19 +45,21 @@ class Game(QWidget):
 
     def game(self):
         self.gaming = True
-        timer = QtCore.QTimer()
-        timer.timeout.connect(self.endGame)
+        timer = QTimer(self)
+        timer.timeout.connect(self.Timeme)
         timer.start(1000)
-        #while self.gaming:
-            #lvl = 1
-            #for i in range(lvl + 2):
-                #for j in range(lvl + 2):
-                    #pass
 
+    def Timeme(self):
+        if self.count != 0:
+            self.count -= 1
+            self.timeText.setText(str(self.count))
+            self.timeBar.setValue(self.count / (30 / 100))
+            print(self.count)
+        else:
+            self.endGame()
 
     def endGame(self):
-        return None
-
+        self.gaming = False
 
 
 
