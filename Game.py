@@ -37,7 +37,7 @@ class Game(QWidget):
 
     def StartGame(self):
         self.timeText.setText(str(self.count))
-        self.timeBar.setValue(self.count / (30 / 100))
+        self.timeBar.setValue(50)
         self.StartBtn.hide()
         self.otschot.move(200, 200)
         self.otschot.resize(200, 20)
