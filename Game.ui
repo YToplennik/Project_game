@@ -586,7 +586,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="gameButton_43">
+  <widget class="QPushButton" name="gameButton_True">
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -653,7 +653,7 @@
   <zorder>gameButton_40</zorder>
   <zorder>gameButton_41</zorder>
   <zorder>gameButton_42</zorder>
-  <zorder>gameButton_43</zorder>
+  <zorder>gameButton_True</zorder>
   <zorder>StartBtn</zorder>
  </widget>
  <resources/>
