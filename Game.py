@@ -1,5 +1,5 @@
 import sys
-import time
+import random
 from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -27,12 +27,12 @@ class Game(QWidget):
     def __init__(self, coun):
         super(Game, self).__init__()
         self.initUI()
-        self.hide_buttons()
+        self.hide_buttons_and_connect()
         self.Gameover_text.hide()
         self.timeBar.setValue(100)
         self.count = coun
 
-    def hide_buttons(self):
+    def hide_buttons_and_connect(self):
         self.gameButton_00.hide()
         self.gameButton_01.hide()
         self.gameButton_02.hide()
@@ -56,7 +56,32 @@ class Game(QWidget):
         self.gameButton_40.hide()
         self.gameButton_41.hide()
         self.gameButton_42.hide()
-        self.gameButton_43.hide()
+        self.gameButton_True.hide()
+
+        # коннектим неправильные кнопки
+        self.gameButton_00.clicked.connect(self.FalseButton)
+        self.gameButton_01.clicked.connect(self.FalseButton)
+        self.gameButton_02.clicked.connect(self.FalseButton)
+        self.gameButton_03.clicked.connect(self.FalseButton)
+
+        self.gameButton_10.clicked.connect(self.FalseButton)
+        self.gameButton_11.clicked.connect(self.FalseButton)
+        self.gameButton_12.clicked.connect(self.FalseButton)
+        self.gameButton_13.clicked.connect(self.FalseButton)
+
+        self.gameButton_20.clicked.connect(self.FalseButton)
+        self.gameButton_21.clicked.connect(self.FalseButton)
+        self.gameButton_22.clicked.connect(self.FalseButton)
+        self.gameButton_23.clicked.connect(self.FalseButton)
+
+        self.gameButton_30.clicked.connect(self.FalseButton)
+        self.gameButton_31.clicked.connect(self.FalseButton)
+        self.gameButton_32.clicked.connect(self.FalseButton)
+        self.gameButton_33.clicked.connect(self.FalseButton)
+
+        self.gameButton_40.clicked.connect(self.FalseButton)
+        self.gameButton_41.clicked.connect(self.FalseButton)
+        self.gameButton_42.clicked.connect(self.FalseButton)
 
     def show_buttons(self):
         self.gameButton_00.show()
@@ -82,7 +107,7 @@ class Game(QWidget):
         self.gameButton_40.show()
         self.gameButton_41.show()
         self.gameButton_42.show()
-        self.gameButton_43.show()
+        self.gameButton_True.show()
 
         self.StartBtn.hide()
         self.StartBtn.resize(0, 0)
@@ -90,24 +115,21 @@ class Game(QWidget):
     def initUI(self):
         uic.loadUi('Game.ui', self)
         self.StartBtn.clicked.connect(self.StartGame)
-        self.otschot = QLabel(self)
 
     def StartGame(self):
+        self.gameButton_True.clicked.connect(self.TrueButton)
         self.timeText.setText(str(self.count))
         self.timeBar.setValue(self.count / (30 / 100))
-        self.otschot.move(200, 200)
-        self.otschot.resize(200, 20)
         self.game()
         self.show_buttons()
 
     def game(self):
-        self.gaming = True
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.Timeme)
         self.timer.start(1000)
 
     def Timeme(self):
-        if self.count != 1:
+        if self.count > 1:
             self.count -= 1
             self.timeText.setText(str(self.count))
             self.timeBar.setValue(int(self.count / (30 / 100)))
@@ -118,15 +140,35 @@ class Game(QWidget):
             self.endGame()
             print(self.count - 1)
 
+    def TrueButton(self):
+        if self.count + 5 <= 30:
+            self.count += 5
+            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeText.setText(str(self.count))
+        else:
+            self.count = 30
+            print('Больше')
+            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeText.setText(str(self.count))
+
+    def FalseButton(self):
+        if self.count - 5 > 0:
+            self.count -= 5
+            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeText.setText(str(self.count))
+        else:
+            self.endGame()
+            self.timeBar.setValue(0)
+            self.timeText.setText(str(0))
+
     def endGame(self):
-        self.gaming = False
-        self.hide_buttons()
+        self.hide_buttons_and_connect()
         self.Gameover_text.show()
         self.timer.stop()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex0 = Lobby(10)
+    ex0 = Lobby(20)
     ex0.show()
     sys.exit(app.exec())
