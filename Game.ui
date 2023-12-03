@@ -15,7 +15,7 @@
   </property>
   <widget class="QPushButton" name="StartBtn">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -31,6 +31,9 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Начать</string>
@@ -57,7 +60,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -121,7 +124,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -148,7 +151,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -174,8 +177,11 @@
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -202,7 +208,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -229,7 +235,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -256,7 +262,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -283,7 +289,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -310,7 +316,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -337,7 +343,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -364,7 +370,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -391,7 +397,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -418,7 +424,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -445,7 +451,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -472,7 +478,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -499,7 +505,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -526,7 +532,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -553,7 +559,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -580,7 +586,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -607,7 +613,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>///</string>
+    <string/>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -629,6 +635,86 @@
    </property>
    <property name="text">
     <string>GAME OVER</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Level">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>20</y>
+     <width>41</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Level:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lvl_text">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>21</y>
+     <width>31</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButtonTxt">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>320</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Текстовый режим</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButtonRGB">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>340</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>RGB режим</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
    </property>
   </widget>
   <zorder>Gameover_text</zorder>
@@ -655,6 +741,10 @@
   <zorder>gameButton_42</zorder>
   <zorder>gameButton_True</zorder>
   <zorder>StartBtn</zorder>
+  <zorder>Level</zorder>
+  <zorder>lvl_text</zorder>
+  <zorder>radioButtonTxt</zorder>
+  <zorder>radioButtonRGB</zorder>
  </widget>
  <resources/>
  <connections/>
