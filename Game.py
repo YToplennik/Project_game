@@ -351,9 +351,6 @@ class Game(QWidget):
                         self.gameButton_True.setStyleSheet(f'background-color: rgb{self.color_True}; color: black;')
                     self.rgbInText(self.color_True, 'self.gameButton_True')
 
-    def set_colorr(self):
-        pass
-
     def FalseButton(self):
         if self.count - 5 > 0:
             self.count -= 5
