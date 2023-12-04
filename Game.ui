@@ -51,8 +51,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -115,8 +116,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -142,8 +144,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -169,8 +172,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -199,8 +203,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -226,8 +231,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -253,8 +259,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -280,8 +287,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -307,8 +315,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -334,8 +343,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -361,8 +371,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -388,8 +399,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -415,8 +427,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -442,8 +455,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -469,8 +483,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -496,8 +511,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -523,8 +539,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -550,8 +567,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -577,8 +595,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>
@@ -604,8 +623,9 @@
    <property name="font">
     <font>
      <family>MS Shell Dlg 2</family>
-     <weight>50</weight>
-     <bold>false</bold>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
      <stylestrategy>NoAntialias</stylestrategy>
     </font>
    </property>

@@ -278,7 +278,7 @@ class Game(QWidget):
         while flag:
             g = self.randomColor()
             eval(a).setText(f'{g}')
-            if col == (0, 0, 0):
+            if col == (0, 0, 0) or col == (0, 0, 255):
                 eval(a).setStyleSheet(f'background-color: rgb{col}; color: white;')
             else:
                 eval(a).setStyleSheet(f'background-color: rgb{col}; color: black;')
@@ -345,7 +345,7 @@ class Game(QWidget):
                     self.gameButton_True.move(30 + self.rx * 100, 60 + self.ry * 100)
                     self.color_True = (random.choice([255, 0]), random.choice([255, 0]), random.choice([255, 0]))
                     self.gameButton_True.setText(f'{self.color_True}')
-                    if self.color_True == (0, 0, 0):
+                    if self.color_True == (0, 0, 0) or self.color_True == (0, 0, 255):
                         self.gameButton_True.setStyleSheet(f'background-color: rgb{self.color_True}; color: white;')
                     else:
                         self.gameButton_True.setStyleSheet(f'background-color: rgb{self.color_True}; color: black;')
