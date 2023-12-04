@@ -1,9 +1,12 @@
 import sys
+import sqlite3
 import random
 from PyQt5 import QtCore, QtGui, uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import tkinter as tk
+from tkinter import simpledialog
 
 
 class Lobby(QMainWindow):
@@ -19,12 +22,18 @@ class Lobby(QMainWindow):
         self.Exit.clicked.connect(self.close)
 
     def openGame(self):
-        self.Game = Game(self.con)
+        ROOT = tk.Tk()
+
+        ROOT.withdraw()
+        # the input dialog
+        self.USER_INP = simpledialog.askstring(title="Test",
+                                          prompt="Как тебя зовут?:")
+        self.Game = Game(self.con, self.USER_INP)
         self.Game.show()
 
 
 class Game(QWidget):
-    def __init__(self, coun):
+    def __init__(self, coun, user):
         super(Game, self).__init__()
         self.initUI()
         self.color_True = (random.choice([255, 0]), 255, random.choice([255, 0]))
@@ -33,7 +42,6 @@ class Game(QWidget):
         self.Gameover_text.hide()
         self.timeBar.setValue(100)
         self.count = coun
-
 
     def hide_buttons_and_connect(self):
         self.gameButton_00.hide()
@@ -222,6 +230,9 @@ class Game(QWidget):
 
     def initUI(self):
         self.lvl = 0
+        db = "BD.sqlite"
+        con = sqlite3.connect(db)
+        cur = con.cursor()
         uic.loadUi('Game.ui', self)
         self.StartBtn.clicked.connect(self.StartGame)
         self.tab = [
@@ -304,6 +315,23 @@ class Game(QWidget):
                 eval(a).setText('Белый')
             elif g == (255, 255, 0):
                 eval(a).setText('Жёлтый')
+        elif self.rezim == 'rgb':
+            if g == (0, 0, 0):
+                eval(a).setText('0 0 0')
+            elif g == (255, 0, 0):
+                eval(a).setText('255 0 0')
+            elif g == (0, 255, 0):
+                eval(a).setText('0 255 0')
+            elif g == (0, 0, 255):
+                eval(a).setText('0 0 255')
+            elif g == (255, 0, 255):
+                eval(a).setText('255 0 255')
+            elif g == (0, 255, 255):
+                eval(a).setText('0 255 255')
+            elif g == (255, 255, 255):
+                eval(a).setText('255 255 255')
+            elif g == (255, 255, 0):
+                eval(a).setText('255 255 0')
 
     def TrueButton(self):
         if self.count + 5 <= 30:
@@ -365,6 +393,16 @@ class Game(QWidget):
         self.hide_buttons_and_connect()
         self.Gameover_text.show()
         self.timer.stop()
+        con = sqlite3.connect('BD.sqlite')
+        cur = con.cursor()
+        zapros = """"""
+        result = cur.execute(zapros).fetchall()
+
+
+
+class Liders(QWidget):
+    def __init__(self):
+        super(Liders, self).__init__()
 
 
 if __name__ == '__main__':
