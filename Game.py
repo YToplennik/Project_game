@@ -397,7 +397,7 @@ class Game(QWidget):
         con = sqlite3.connect('BD.sqlite')
         cur = con.cursor()
         name = self.user
-        score = self.lvl
+        score = self.lvl - 1
 
         result = cur.execute(f"""SELECT max_result FROM players
                     WHERE player = '{name}' """)
@@ -406,12 +406,15 @@ class Game(QWidget):
                 self.prov = prov
             a = True
         if not a:
-            cur.execute(f'''INSERT INTO players(player, max_result) VALUES('{name}', {score - 1})''')
+            cur.execute(f'''INSERT INTO players(player, max_result) VALUES('{name}', {score})''')
+            cur.execute(f'''INSERT INTO all_results(player, result) VALUES('{name}', {score})''')
             print('Добавлен игрок')
 
-        if a and self.prov < self.lvl:
-            cur.execute(f"""UPDATE players SET max_result = {score - 1} WHERE player = '{name}'""")
-            print('Результат обновлён')
+        if a:
+            cur.execute(f'''INSERT INTO all_results(player, result) VALUES('{name}', {score})''')
+            if self.prov < self.lvl:
+                cur.execute(f"""UPDATE players SET max_result = {score} WHERE player = '{name}'""")
+                print('Результат обновлён')
 
         con.commit()
         con.close()
