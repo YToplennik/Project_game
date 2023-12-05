@@ -1,9 +1,8 @@
 import sys
 import sqlite3
 import random
-from PyQt5 import QtCore, QtGui, uic
+from PyQt5 import uic
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import tkinter as tk
 from tkinter import simpledialog
@@ -25,17 +24,18 @@ class Lobby(QMainWindow):
         ROOT = tk.Tk()
 
         ROOT.withdraw()
-        # the input dialog
         self.USER_INP = simpledialog.askstring(title="Test",
                                           prompt="Как тебя зовут?:")
-        self.Game = Game(self.con, self.USER_INP)
-        self.Game.show()
+        if self.USER_INP:
+            self.Game = Game(self.con, self.USER_INP)
+            self.Game.show()
 
 
 class Game(QWidget):
     def __init__(self, coun, user):
         super(Game, self).__init__()
         self.initUI()
+        self.user = user
         self.color_True = (random.choice([255, 0]), 255, random.choice([255, 0]))
         self.hide_buttons_and_connect()
         self.setButtonColorBase()
@@ -393,11 +393,28 @@ class Game(QWidget):
         self.hide_buttons_and_connect()
         self.Gameover_text.show()
         self.timer.stop()
+        a = None
         con = sqlite3.connect('BD.sqlite')
         cur = con.cursor()
-        zapros = """"""
-        result = cur.execute(zapros).fetchall()
+        name = self.user
+        score = self.lvl
 
+        result = cur.execute(f"""SELECT max_result FROM players
+                    WHERE player = '{name}' """)
+        for res in result:
+            for prov in res:
+                self.prov = prov
+            a = True
+        if not a:
+            cur.execute(f'''INSERT INTO players(player, max_result) VALUES('{name}', {score - 1})''')
+            print('Добавлен игрок')
+
+        if a and self.prov < self.lvl:
+            cur.execute(f"""UPDATE players SET max_result = {score - 1} WHERE player = '{name}'""")
+            print('Результат обновлён')
+
+        con.commit()
+        con.close()
 
 
 class Liders(QWidget):
