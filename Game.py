@@ -2,6 +2,7 @@ import sys
 import sqlite3
 import random
 from PyQt5 import uic
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import tkinter as tk
@@ -9,31 +10,38 @@ from tkinter import simpledialog
 
 
 class Lobby(QMainWindow):
-    def __init__(self, con):
-        super(Lobby, self).__init__()
+    def __init__(self, con, max_timer):
+        super().__init__()
         self.initUI()
         self.con = con
+        self.max_timer = max_timer
 
     def initUI(self):
         uic.loadUi('untitled.ui', self)
 
         self.btnPlay.clicked.connect(self.openGame)
         self.Exit.clicked.connect(self.close)
+        self.btnLiders.clicked.connect(self.Liders)
 
     def openGame(self):
         ROOT = tk.Tk()
 
         ROOT.withdraw()
         self.USER_INP = simpledialog.askstring(title="Test",
-                                          prompt="Как тебя зовут?:")
+                                               prompt="Как тебя зовут?:")
         if self.USER_INP:
-            self.Game = Game(self.con, self.USER_INP)
+            self.Game = Game(self.con, self.USER_INP, self.max_timer)
             self.Game.show()
+
+    def Liders(self):
+        self.Liders = Liders()
+        self.Liders.show()
 
 
 class Game(QWidget):
-    def __init__(self, coun, user):
-        super(Game, self).__init__()
+    def __init__(self, coun, user, max_timer):
+        super().__init__()
+        self.max_timer = max_timer
         self.initUI()
         self.user = user
         self.color_True = (random.choice([255, 0]), 255, random.choice([255, 0]))
@@ -44,25 +52,9 @@ class Game(QWidget):
         self.count = coun
 
     def hide_buttons_and_connect(self):
-        self.gameButton_00.hide()
-        self.gameButton_01.hide()
-        self.gameButton_02.hide()
-        self.gameButton_03.hide()
-
-        self.gameButton_10.hide()
-        self.gameButton_11.hide()
-        self.gameButton_12.hide()
-        self.gameButton_13.hide()
-
-        self.gameButton_20.hide()
-        self.gameButton_21.hide()
-        self.gameButton_22.hide()
-        self.gameButton_23.hide()
-
-        self.gameButton_30.hide()
-        self.gameButton_31.hide()
-        self.gameButton_32.hide()
-        self.gameButton_33.hide()
+        for y in range(4):
+            for x in range(4):
+                eval('self.gameButton_{}'.format(str(x) + str(y))).hide()
 
         self.gameButton_40.hide()
         self.gameButton_41.hide()
@@ -70,25 +62,9 @@ class Game(QWidget):
         self.gameButton_True.hide()
 
         # коннектим неправильные кнопки
-        self.gameButton_00.clicked.connect(self.FalseButton)
-        self.gameButton_01.clicked.connect(self.FalseButton)
-        self.gameButton_02.clicked.connect(self.FalseButton)
-        self.gameButton_03.clicked.connect(self.FalseButton)
-
-        self.gameButton_10.clicked.connect(self.FalseButton)
-        self.gameButton_11.clicked.connect(self.FalseButton)
-        self.gameButton_12.clicked.connect(self.FalseButton)
-        self.gameButton_13.clicked.connect(self.FalseButton)
-
-        self.gameButton_20.clicked.connect(self.FalseButton)
-        self.gameButton_21.clicked.connect(self.FalseButton)
-        self.gameButton_22.clicked.connect(self.FalseButton)
-        self.gameButton_23.clicked.connect(self.FalseButton)
-
-        self.gameButton_30.clicked.connect(self.FalseButton)
-        self.gameButton_31.clicked.connect(self.FalseButton)
-        self.gameButton_32.clicked.connect(self.FalseButton)
-        self.gameButton_33.clicked.connect(self.FalseButton)
+        for y in range(4):
+            for x in range(4):
+                eval('self.gameButton_{}'.format(str(x) + str(y))).clicked.connect(self.FalseButton)
 
         self.gameButton_40.clicked.connect(self.FalseButton)
         self.gameButton_41.clicked.connect(self.FalseButton)
@@ -96,25 +72,9 @@ class Game(QWidget):
 
     def setButtonColorBase(self):
         # Устанавливаем цвет кнопок
-        self.gameButton_00.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_01.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_02.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_03.setStyleSheet('background-color: #FFFFFF')
-
-        self.gameButton_10.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_11.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_12.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_13.setStyleSheet('background-color: #FFFFFF')
-
-        self.gameButton_20.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_21.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_22.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_23.setStyleSheet('background-color: #FFFFFF')
-
-        self.gameButton_30.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_31.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_32.setStyleSheet('background-color: #FFFFFF')
-        self.gameButton_33.setStyleSheet('background-color: #FFFFFF')
+        for y in range(4):
+            for x in range(4):
+                eval('self.gameButton_{}'.format(str(x) + str(y))).setStyleSheet('background-color: #FFFFFF')
 
         self.gameButton_40.setStyleSheet('background-color: #FFFFFF')
         self.gameButton_41.setStyleSheet('background-color: #FFFFFF')
@@ -200,25 +160,9 @@ class Game(QWidget):
             self.randomFalseText('self.gameButton_42', b)
 
     def show_buttons(self):
-        self.gameButton_00.show()
-        self.gameButton_01.show()
-        self.gameButton_02.show()
-        self.gameButton_03.show()
-
-        self.gameButton_10.show()
-        self.gameButton_11.show()
-        self.gameButton_12.show()
-        self.gameButton_13.show()
-
-        self.gameButton_20.show()
-        self.gameButton_21.show()
-        self.gameButton_22.show()
-        self.gameButton_23.show()
-
-        self.gameButton_30.show()
-        self.gameButton_31.show()
-        self.gameButton_32.show()
-        self.gameButton_33.show()
+        for y in range(4):
+            for x in range(4):
+                eval('self.gameButton_{}'.format(str(x) + str(y))).show()
 
         self.gameButton_40.show()
         self.gameButton_41.show()
@@ -230,9 +174,6 @@ class Game(QWidget):
 
     def initUI(self):
         self.lvl = 0
-        db = "BD.sqlite"
-        con = sqlite3.connect(db)
-        cur = con.cursor()
         uic.loadUi('Game.ui', self)
         self.StartBtn.clicked.connect(self.StartGame)
         self.tab = [
@@ -245,6 +186,7 @@ class Game(QWidget):
         self.button_group = QButtonGroup()
         self.button_group.addButton(self.radioButtonTxt)
         self.button_group.addButton(self.radioButtonRGB)
+        self.button_group.addButton(self.radioButtonOr)
         self.button_group.buttonClicked.connect(self.radio)
 
     def StartGame(self):
@@ -252,7 +194,8 @@ class Game(QWidget):
         self.timeText.setText(str(self.count))
         self.radioButtonRGB.hide()
         self.radioButtonTxt.hide()
-        self.timeBar.setValue(self.count / (30 / 100))
+        self.radioButtonOr.hide()
+        self.timeBar.setValue(int(self.count / (self.max_timer / 100)))
         self.game()
         self.show_buttons()
         self.new_lvl()
@@ -269,7 +212,7 @@ class Game(QWidget):
         if self.count > 1:
             self.count -= 1
             self.timeText.setText(str(self.count))
-            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeBar.setValue(int(self.count / (self.max_timer / 100)))
             # print(self.count)
         else:
             self.timeText.setText(str(0))
@@ -282,6 +225,8 @@ class Game(QWidget):
             self.rezim = 'txt'
         elif button.text() == 'RGB режим':
             self.rezim = 'rgb'
+        elif button.text() == 'Смешанный':
+            self.rezim = 'or'
         self.StartBtn.setEnabled(True)
 
     def randomFalseText(self, a, col):
@@ -332,16 +277,33 @@ class Game(QWidget):
                 eval(a).setText('255 255 255')
             elif g == (255, 255, 0):
                 eval(a).setText('255 255 0')
+        elif self.rezim == 'or':
+            if g == (0, 0, 0):
+                eval(a).setText(random.choice(['Чёрный', '0, 0, 0']))
+            elif g == (255, 0, 0):
+                eval(a).setText(random.choice(['Красный', '255, 0, 0']))
+            elif g == (0, 255, 0):
+                eval(a).setText(random.choice(['Зелёный', '0, 255, 0']))
+            elif g == (0, 0, 255):
+                eval(a).setText(random.choice(['Синий', '0, 0, 255']))
+            elif g == (255, 0, 255):
+                eval(a).setText(random.choice(['Розовый', '255, 0, 255']))
+            elif g == (0, 255, 255):
+                eval(a).setText(random.choice(['Голубой', '0 255 255']))
+            elif g == (255, 255, 255):
+                eval(a).setText(random.choice(['Белый', '255 255 255']))
+            elif g == (255, 255, 0):
+                eval(a).setText(random.choice(['Жёлтый', '255, 255, 0']))
 
     def TrueButton(self):
-        if self.count + 5 <= 30:
+        if self.count + 5 <= self.max_timer:
             self.count += 5
-            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeBar.setValue(int(self.count / (self.max_timer / 100)))
             self.timeText.setText(str(self.count))
         else:
-            self.count = 30
+            self.count = self.max_timer
             # print('Больше')
-            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeBar.setValue(int(self.count / (self.max_timer / 100)))
             self.timeText.setText(str(self.count))
         self.lvl_text.setText(str(self.lvl))
         self.new_lvl()
@@ -382,7 +344,7 @@ class Game(QWidget):
     def FalseButton(self):
         if self.count - 5 > 0:
             self.count -= 5
-            self.timeBar.setValue(int(self.count / (30 / 100)))
+            self.timeBar.setValue(int(self.count / (self.max_timer / 100)))
             self.timeText.setText(str(self.count))
         else:
             self.endGame()
@@ -393,40 +355,141 @@ class Game(QWidget):
         self.hide_buttons_and_connect()
         self.Gameover_text.show()
         self.timer.stop()
-        a = None
+        a_text = None
+        a_rgb = None
+        a_smesh = None
         con = sqlite3.connect('BD.sqlite')
         cur = con.cursor()
         name = self.user
         score = self.lvl - 1
 
-        result = cur.execute(f"""SELECT max_result FROM players
-                    WHERE player = '{name}' """)
-        for res in result:
-            for prov in res:
-                self.prov = prov
-            a = True
-        if not a:
-            cur.execute(f'''INSERT INTO players(player, max_result) VALUES('{name}', {score})''')
-            cur.execute(f'''INSERT INTO all_results(player, result) VALUES('{name}', {score})''')
+        # играл ли вообще:
+        # играл ли в текст
+        if self.rezim == 'txt':
+            result_text = cur.execute(f"""SELECT result FROM players_text WHERE player = '{name}' """)
+            for res in result_text:
+                for prov in res:
+                    self.prov = prov
+                a_text = True
+        # играл ли в RGB
+        if self.rezim == 'rgb':
+            result_rgb = cur.execute(f"""SELECT result FROM players_rgb WHERE player = '{name}' """)
+            for res in result_rgb:
+                for prov in res:
+                    self.prov = prov
+                a_rgb = True
+        # играл ли в smesh
+        if self.rezim == 'or':
+            result_rgb = cur.execute(f"""SELECT result FROM players_smesh WHERE player = '{name}' """)
+            for res in result_rgb:
+                for prov in res:
+                    self.prov = prov
+                a_smesh = True
+
+        # Если новый игрок
+        # RGB
+        if not a_rgb and self.rezim == 'rgb':
+            cur.execute(f'''INSERT INTO players_rgb(player, result) VALUES('{name}', 0)''')
+            print('Добавлен игрок')
+        # Text
+        if not a_text and self.rezim == 'txt':
+            cur.execute(f'''INSERT INTO players_text(player, result) VALUES('{name}', 0)''')
+            print('Добавлен игрок')
+        # Smesh
+        if not a_smesh and self.rezim == 'or':
+            cur.execute(f'''INSERT INTO players_smesh(player, result) VALUES('{name}', 0)''')
             print('Добавлен игрок')
 
-        if a:
-            cur.execute(f'''INSERT INTO all_results(player, result) VALUES('{name}', {score})''')
-            if self.prov < self.lvl:
-                cur.execute(f"""UPDATE players SET max_result = {score} WHERE player = '{name}'""")
-                print('Результат обновлён')
+        if self.rezim == 'txt':
+            cur.execute(f'''INSERT INTO all_results(player, result_text) VALUES('{name}', {score})''')
+            if not a_text:
+                cur.execute(f"""UPDATE players_text SET result = {score} WHERE player = '{name}'""")
 
+            if a_text and self.prov < self.lvl:
+                cur.execute(f"""UPDATE players_text SET result = {score} WHERE player = '{name}'""")
+                # print('Результат обновлён')
+        if self.rezim == 'rgb':
+            cur.execute(f'''INSERT INTO all_results(player, result_rgb) VALUES('{name}', {score})''')
+            if not a_text:
+                cur.execute(f"""UPDATE players_rgb SET result = {score} WHERE player = '{name}'""")
+
+            if a_text and self.prov < self.lvl:
+                cur.execute(f"""UPDATE players_rgb SET result = {score} WHERE player = '{name}'""")
+                # print('Результат обновлён')
+        if self.rezim == 'or':
+            cur.execute(f'''INSERT INTO all_results(player, result_smesh) VALUES('{name}', {score})''')
+            if not a_text:
+                cur.execute(f"""UPDATE players_smesh SET result = {score} WHERE player = '{name}'""")
+
+            if a_text and self.prov < self.lvl:
+                cur.execute(f"""UPDATE players_smesh SET result = {score} WHERE player = '{name}'""")
+                # print('Результат обновлён')
         con.commit()
         con.close()
 
 
 class Liders(QWidget):
     def __init__(self):
-        super(Liders, self).__init__()
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        uic.loadUi('Liders.ui', self)
+        con = sqlite3.connect('BD.sqlite')
+        cur = con.cursor()
+        self.comboBox2.addItems(['Текст', 'RGB', 'Смешанный'])
+
+        list_pl = []
+        result_text = cur.execute("""SELECT player FROM players_text""")
+        for i in result_text:
+            print(i)
+            if i not in list_pl:
+                list_pl.append(i)
+                self.comboBox.addItems(i)
+
+        result_rgb = cur.execute("""SELECT player FROM players_rgb""")
+        for j in result_rgb:
+            print(j)
+            if j not in list_pl:
+                list_pl.append(j)
+                self.comboBox.addItems(j)
+
+        result_smesh = cur.execute("""SELECT player FROM players_smesh""")
+        for u in result_smesh:
+            print(u)
+            if u not in list_pl:
+                list_pl.append(u)
+                self.comboBox.addItems(u)
+
+        self.Show.clicked.connect(self.show_pl)
+        db = QSqlDatabase.addDatabase('QSQLITE')
+        db.setDatabaseName('BD.sqlite')
+        db.open()
+        self.model = QSqlTableModel(self, db)
+        self.Show_2.clicked.connect(self.obn)
+
+    def obn(self):
+        rez = self.comboBox2.currentText()
+        if rez == 'Текст':
+            self.model.setTable('players_text')
+            self.model.select()
+            self.view.setModel(self.model)
+        if rez == 'RGB':
+            self.model.setTable('players_rgb')
+            self.model.select()
+            self.view.setModel(self.model)
+        if rez == 'Смешанный':
+            self.model.setTable('players_smesh')
+            self.model.select()
+            self.view.setModel(self.model)
+
+    def show_pl(self):
+        pl = self.comboBox.currentText()
+        print(pl)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex0 = Lobby(20)
+    ex0 = Lobby(20, 66)
     ex0.show()
     sys.exit(app.exec())

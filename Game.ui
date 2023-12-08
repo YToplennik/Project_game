@@ -737,6 +737,25 @@
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="QRadioButton" name="radioButtonOr">
+   <property name="geometry">
+    <rect>
+     <x>161</x>
+     <y>360</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Смешанный</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
   <zorder>Gameover_text</zorder>
   <zorder>gameButton_00</zorder>
   <zorder>timeBar</zorder>
@@ -765,6 +784,7 @@
   <zorder>lvl_text</zorder>
   <zorder>radioButtonTxt</zorder>
   <zorder>radioButtonRGB</zorder>
+  <zorder>radioButtonOr</zorder>
  </widget>
  <resources/>
  <connections/>
