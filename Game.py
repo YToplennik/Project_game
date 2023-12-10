@@ -22,6 +22,7 @@ class Lobby(QMainWindow):
         self.btnPlay.clicked.connect(self.openGame)
         self.Exit.clicked.connect(self.close)
         self.btnLiders.clicked.connect(self.Liders)
+        self.btnSkins.clicked.connect(self.openSkins)
 
     def openGame(self):
         ROOT = tk.Tk()
@@ -36,6 +37,9 @@ class Lobby(QMainWindow):
     def Liders(self):
         self.Liders = Liders()
         self.Liders.show()
+
+    def openSkins(self):
+        self.skins = Skins()
 
 
 class Game(QWidget):
@@ -442,50 +446,97 @@ class Liders(QWidget):
         list_pl = []
         result_text = cur.execute("""SELECT player FROM players_text""")
         for i in result_text:
-            print(i)
+            # print(i)
             if i not in list_pl:
                 list_pl.append(i)
                 self.comboBox.addItems(i)
 
         result_rgb = cur.execute("""SELECT player FROM players_rgb""")
         for j in result_rgb:
-            print(j)
+            # print(j)
             if j not in list_pl:
                 list_pl.append(j)
                 self.comboBox.addItems(j)
 
         result_smesh = cur.execute("""SELECT player FROM players_smesh""")
         for u in result_smesh:
-            print(u)
+            # print(u)
             if u not in list_pl:
                 list_pl.append(u)
                 self.comboBox.addItems(u)
 
         self.Show.clicked.connect(self.show_pl)
         db = QSqlDatabase.addDatabase('QSQLITE')
-        db.setDatabaseName('BD.sqlite')
+        db.setDatabaseName('BD2.sqlite')
         db.open()
         self.model = QSqlTableModel(self, db)
         self.Show_2.clicked.connect(self.obn)
 
     def obn(self):
+        con = sqlite3.connect('BD.sqlite')
+        cur = con.cursor()
+        con2 = sqlite3.connect('BD2.sqlite')
+        cur2 = con2.cursor()
         rez = self.comboBox2.currentText()
         if rez == 'Текст':
-            self.model.setTable('players_text')
+            cur2.execute('''DELETE from output''')
+            a = cur.execute('''SELECT * FROM players_text ORDER BY result DESC''')
+            for i in a:
+                cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
+                con2.commit()
+            #print(*cur2.execute('''SELECT * FROM output'''))
+            self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
+            cur2.execute('''DELETE from output''')
+            con2.commit()
+            con.close()
+            con2.close()
         if rez == 'RGB':
-            self.model.setTable('players_rgb')
+            cur2.execute('''DELETE from output''')
+            a = cur.execute('''SELECT * FROM players_rgb ORDER BY result DESC''')
+            for i in a:
+                cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
+                con2.commit()
+            #print(*cur2.execute('''SELECT * FROM output'''))
+            self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
+            cur2.execute('''DELETE from output''')
+            con2.commit()
+            con.close()
+            con2.close()
         if rez == 'Смешанный':
-            self.model.setTable('players_smesh')
+            cur2.execute('''DELETE from output''')
+            a = cur.execute('''SELECT * FROM players_smesh ORDER BY result DESC''')
+            for i in a:
+                cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
+                con2.commit()
+            #print(*cur2.execute('''SELECT * FROM output'''))
+            self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
+            cur2.execute('''DELETE from output''')
+            con2.commit()
+            con.close()
+            con2.close()
 
     def show_pl(self):
         pl = self.comboBox.currentText()
         print(pl)
+
+
+class Skins(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        con = sqlite3.connect('BD2.sqlite')
+        cur = con.cursor()
+        cur.execute('''''')
+        con.commit()
+        con.close()
 
 
 if __name__ == '__main__':
