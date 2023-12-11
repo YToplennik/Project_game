@@ -394,15 +394,15 @@ class Game(QWidget):
         # RGB
         if not a_rgb and self.rezim == 'rgb':
             cur.execute(f'''INSERT INTO players_rgb(player, result) VALUES('{name}', 0)''')
-            print('Добавлен игрок')
+            # print('Добавлен игрок')
         # Text
         if not a_text and self.rezim == 'txt':
             cur.execute(f'''INSERT INTO players_text(player, result) VALUES('{name}', 0)''')
-            print('Добавлен игрок')
+            # print('Добавлен игрок')
         # Smesh
         if not a_smesh and self.rezim == 'or':
             cur.execute(f'''INSERT INTO players_smesh(player, result) VALUES('{name}', 0)''')
-            print('Добавлен игрок')
+            # print('Добавлен игрок')
 
         if self.rezim == 'txt':
             cur.execute(f'''INSERT INTO all_results(player, result_text) VALUES('{name}', {score})''')
