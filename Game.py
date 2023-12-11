@@ -465,11 +465,12 @@ class Liders(QWidget):
                 list_pl.append(u)
                 self.comboBox.addItems(u)
 
-        self.Show.clicked.connect(self.show_pl)
         db = QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName('BD2.sqlite')
         db.open()
         self.model = QSqlTableModel(self, db)
+        self.model1 = QSqlTableModel(self, db)
+        self.Show.clicked.connect(self.show_pl)
         self.Show_2.clicked.connect(self.obn)
 
     def obn(self):
@@ -484,7 +485,7 @@ class Liders(QWidget):
             for i in a:
                 cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
                 con2.commit()
-            #print(*cur2.execute('''SELECT * FROM output'''))
+            # print(*cur2.execute('''SELECT * FROM output'''))
             self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
@@ -498,7 +499,7 @@ class Liders(QWidget):
             for i in a:
                 cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
                 con2.commit()
-            #print(*cur2.execute('''SELECT * FROM output'''))
+            # print(*cur2.execute('''SELECT * FROM output'''))
             self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
@@ -512,7 +513,7 @@ class Liders(QWidget):
             for i in a:
                 cur2.execute(f'''INSERT INTO output(player, result) VALUES('{i[0]}', {i[1]})''')
                 con2.commit()
-            #print(*cur2.execute('''SELECT * FROM output'''))
+            # print(*cur2.execute('''SELECT * FROM output'''))
             self.model.setTable('output')
             self.model.select()
             self.view.setModel(self.model)
@@ -522,8 +523,25 @@ class Liders(QWidget):
             con2.close()
 
     def show_pl(self):
-        pl = self.comboBox.currentText()
-        print(pl)
+        con = sqlite3.connect('BD.sqlite')
+        cur = con.cursor()
+        con2 = sqlite3.connect('BD2.sqlite')
+        cur2 = con2.cursor()
+        rez = self.comboBox.currentText()
+        cur2.execute('''DELETE from output''')
+        a = cur.execute(f'''SELECT * FROM all_results WHERE player = "{rez}"''')
+        for i in a:
+            cur2.execute(f'''INSERT INTO output2(player, result_text,  result_rgb, \
+                    result_smesh) VALUES('{i[0]}', {i[1]}, {i[2]}, {i[3]})''')
+            con2.commit()
+        # print(*cur2.execute('''SELECT * FROM output'''))
+        self.model1.setTable('output2')
+        self.model1.select()
+        self.one_pl.setModel(self.model1)
+        cur2.execute('''DELETE from output2''')
+        con2.commit()
+        con.close()
+        con2.close()
 
 
 class Skins(QWidget):
@@ -532,11 +550,7 @@ class Skins(QWidget):
         self.initUI()
 
     def initUI(self):
-        con = sqlite3.connect('BD2.sqlite')
-        cur = con.cursor()
-        cur.execute('''''')
-        con.commit()
-        con.close()
+        pass
 
 
 if __name__ == '__main__':
