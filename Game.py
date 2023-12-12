@@ -25,6 +25,7 @@ class Lobby(QMainWindow):
         self.btnSkins.clicked.connect(self.openSkins)
 
     def openGame(self):
+        self.btnPlay.setEnabled(False)
         ROOT = tk.Tk()
 
         ROOT.withdraw()
@@ -33,6 +34,9 @@ class Lobby(QMainWindow):
         if self.USER_INP:
             self.Game = Game(self.con, self.USER_INP, self.max_timer)
             self.Game.show()
+            self.btnPlay.setEnabled(True)
+        else:
+            self.btnPlay.setEnabled(True)
 
     def Liders(self):
         self.Liders = Liders()
@@ -54,6 +58,7 @@ class Game(QWidget):
         self.Gameover_text.hide()
         self.timeBar.setValue(100)
         self.count = coun
+        self.count1 = coun
 
     def hide_buttons_and_connect(self):
         for y in range(4):
@@ -192,6 +197,10 @@ class Game(QWidget):
         self.button_group.addButton(self.radioButtonRGB)
         self.button_group.addButton(self.radioButtonOr)
         self.button_group.buttonClicked.connect(self.radio)
+        self.retrybtn.hide()
+        self.exitbtn.hide()
+        self.retrybtn.clicked.connect(self.retry)
+        self.exitbtn.clicked.connect(self.close)
 
     def StartGame(self):
         self.gameButton_True.clicked.connect(self.TrueButton)
@@ -430,6 +439,24 @@ class Game(QWidget):
                 # print('Результат обновлён')
         con.commit()
         con.close()
+        self.exitbtn.show()
+        self.retrybtn.show()
+
+    def retry(self):
+        # self.initUI()
+        # self.color_True = (random.choice([255, 0]), 255, random.choice([255, 0]))
+        # self.hide_buttons_and_connect()
+        # self.setButtonColorBase()
+        # self.Gameover_text.hide()
+        # self.timeBar.setValue(100)
+        # self.count = self.count1
+        # self.radioButtonRGB.show()
+        # self.radioButtonTxt.show()
+        # self.radioButtonOr.show()
+        # self.StartBtn.show()
+        # self.exitbtn.hide()
+        # self.retrybtn.hide()
+        pass
 
 
 class Liders(QWidget):
@@ -550,6 +577,7 @@ class Skins(QWidget):
         self.initUI()
 
     def initUI(self):
+        # В разработке
         pass
 
 
